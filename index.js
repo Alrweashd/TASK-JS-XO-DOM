@@ -7,15 +7,13 @@ function fillButton(index, text) {
 }
 // pre-made a function. You can use this function to present an alert to say someone wins
 function winningAlert(winner) {
-  if(confirm(`Horraaay, ${winner} wins!`)){
-     // The code here will be exectued if you press on OK button that will pop on the window 
+  if (confirm(`Horraaay, ${winner} wins!`)) {
+    // The code here will be exectued if you press on OK button that will pop on the window
   }
 }
 
 // SAMPLE CODE: This code fills the 1st and 9th button with X and O initially
 // ❗️ Delete this code once you are done testing
-fillButton(1, "X");
-fillButton(9, "O");
 
 /**
  *
@@ -24,9 +22,46 @@ fillButton(9, "O");
  * Add your code here, since this is going to be your main function
  * That interacts with the UI
  */
+let flag = 9;
+let ind = [];
+const row1 = [1, 2, 3];
+const row2 = [4, 5, 6];
+const row3 = [7, 8, 9];
+// const column1 = [];
+// const column1 =;
+// const column1 =;
+// const cross1=;
+let xindex = [];
 function clickButton(index) {
-  console.log(`Button number ${index} is clicked`);
   // Your main code here.
+  // if (x) {
+  //   confirm(`Horraaay, ${x} wins!`);
+  // }
+  let value;
+  if (flag % 2 == 1 && !ind.includes(index)) {
+    value = "X";
+    xindex.push(index);
+    fillButton(index, value);
+    ind.push(index);
+    if (flag == 0) {
+      ind = [];
+    }
+    if (ind == row1) {
+      winningAlert(value);
+    }
+    flag--;
+  } else if (flag % 2 == 0 && !ind.includes(index)) {
+    value = "O";
+    fillButton(index, value);
+    ind.push(index);
+    if (flag == 0) {
+      ind = [];
+    }
+    //fillButton(1, "X");
+    // fillButton(9, "X");
+    // fillButton(5, "X");
+    flag--;
+  }
 }
 
 /**
