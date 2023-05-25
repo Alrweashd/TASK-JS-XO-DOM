@@ -32,8 +32,18 @@ const column2 = [2, 5, 8];
 const column3 = [3, 6, 9];
 const cross1 = [1, 5, 9];
 const cross2 = [3, 5, 7];
+let rules = [
+  [1, 2, 3], //rows
+  [4, 5, 6],
+  [7, 8, 9],
+  [1, 4, 7], //columns
+  [2, 5, 8],
+  [3, 6, 9],
+  [1, 5, 9], //cross
+  [3, 5, 7],
+];
 let xs = [];
-let ys = [];
+let os = [];
 function clickButton(index) {
   // Your main code here.
   // if (x) {
@@ -43,11 +53,10 @@ function clickButton(index) {
   if (flag % 2 == 1 && !ind.includes(index)) {
     value = "X";
     ind.push(index);
+    xs.push(index);
     fillButton(index, value);
-    //ind.push(index);
-    if (flag == 0) ind = [];
-
-    if (ind == row1) {
+    console.log(document.getElementById(index).innerHTML === "X");
+    if (checkWinner(xs)) {
       winningAlert(value);
     }
     flag--;
@@ -55,22 +64,37 @@ function clickButton(index) {
     value = "O";
     fillButton(index, value);
     ind.push(index);
-    if (flag == 0) {
-      ind = [];
+    os.push(index);
+    console.log(document.getElementById(index).innerHTML);
+    if (checkWinner(os)) {
+      winningAlert(value);
     }
     //fillButton(1, "X");
     // fillButton(9, "X");
     // fillButton(5, "X");
     flag--;
   }
-  if (flag == 0) {
-    fillButton(1, "");
-    fillButton(2, "");
-  }
+
+  // if (flag == 0) {
+  //   ind = [];
+  //   fillButton(1, "");
+  //   fillButton(2, "");
+  // }
 }
 
 /**
  * (Optional) It's always a good idea to make a function for every single purpose.
  */
 // function checkWinner
+function checkWinner(indexs) {
+  for (let i = 0; i <= ind.length - 1; i++) {
+    if (
+      indexs.includes(rules[i][0]) &&
+      indexs.includes(rules[i][1]) &&
+      indexs.includes(rules[i][2])
+    )
+      return true;
+  }
+  return false;
+}
 // function restartGame
