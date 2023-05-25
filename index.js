@@ -58,6 +58,7 @@ function clickButton(index) {
     console.log(document.getElementById(index).innerHTML === "X");
     if (checkWinner(xs)) {
       winningAlert(value);
+      restartGame();
     }
     flag--;
   } else if (flag % 2 == 0 && !ind.includes(index)) {
@@ -68,6 +69,7 @@ function clickButton(index) {
     console.log(document.getElementById(index).innerHTML);
     if (checkWinner(os)) {
       winningAlert(value);
+      restartGame();
     }
     //fillButton(1, "X");
     // fillButton(9, "X");
@@ -75,11 +77,7 @@ function clickButton(index) {
     flag--;
   }
 
-  // if (flag == 0) {
-  //   ind = [];
-  //   fillButton(1, "");
-  //   fillButton(2, "");
-  // }
+  if (flag == 0) restartGame();
 }
 
 /**
@@ -87,7 +85,7 @@ function clickButton(index) {
  */
 // function checkWinner
 function checkWinner(indexs) {
-  for (let i = 0; i <= ind.length - 1; i++) {
+  for (let i = 0; i <= rules.length - 1; i++) {
     if (
       indexs.includes(rules[i][0]) &&
       indexs.includes(rules[i][1]) &&
@@ -98,3 +96,13 @@ function checkWinner(indexs) {
   return false;
 }
 // function restartGame
+
+function restartGame() {
+  for (let i = 1; i <= 9; i++) {
+    fillButton(i, "");
+  }
+  flag = 9;
+  ind = [];
+  xs = [];
+  os = [];
+}
