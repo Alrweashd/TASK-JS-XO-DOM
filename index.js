@@ -27,11 +27,13 @@ let ind = [];
 const row1 = [1, 2, 3];
 const row2 = [4, 5, 6];
 const row3 = [7, 8, 9];
-// const column1 = [];
-// const column1 =;
-// const column1 =;
-// const cross1=;
-let xindex = [];
+const column1 = [1, 4, 7];
+const column2 = [2, 5, 8];
+const column3 = [3, 6, 9];
+const cross1 = [1, 5, 9];
+const cross2 = [3, 5, 7];
+let xs = [];
+let ys = [];
 function clickButton(index) {
   // Your main code here.
   // if (x) {
@@ -40,12 +42,11 @@ function clickButton(index) {
   let value;
   if (flag % 2 == 1 && !ind.includes(index)) {
     value = "X";
-    xindex.push(index);
-    fillButton(index, value);
     ind.push(index);
-    if (flag == 0) {
-      ind = [];
-    }
+    fillButton(index, value);
+    //ind.push(index);
+    if (flag == 0) ind = [];
+
     if (ind == row1) {
       winningAlert(value);
     }
@@ -61,6 +62,10 @@ function clickButton(index) {
     // fillButton(9, "X");
     // fillButton(5, "X");
     flag--;
+  }
+  if (flag == 0) {
+    fillButton(1, "");
+    fillButton(2, "");
   }
 }
 
