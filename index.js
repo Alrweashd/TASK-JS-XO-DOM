@@ -24,14 +24,8 @@ function winningAlert(winner) {
  */
 let flag = 9;
 let ind = [];
-const row1 = [1, 2, 3];
-const row2 = [4, 5, 6];
-const row3 = [7, 8, 9];
-const column1 = [1, 4, 7];
-const column2 = [2, 5, 8];
-const column3 = [3, 6, 9];
-const cross1 = [1, 5, 9];
-const cross2 = [3, 5, 7];
+let xs = [];
+let os = [];
 let rules = [
   [1, 2, 3], //rows
   [4, 5, 6],
@@ -42,42 +36,33 @@ let rules = [
   [1, 5, 9], //cross
   [3, 5, 7],
 ];
-let xs = [];
-let os = [];
+
 function clickButton(index) {
-  // Your main code here.
-  // if (x) {
-  //   confirm(`Horraaay, ${x} wins!`);
-  // }
-  let value;
   if (flag % 2 == 1 && !ind.includes(index)) {
-    value = "X";
     ind.push(index);
     xs.push(index);
-    fillButton(index, value);
-    console.log(document.getElementById(index).innerHTML === "X");
+    fillButton(index, "X");
+    flag--;
     if (checkWinner(xs)) {
-      winningAlert(value);
+      winningAlert("player 1");
       restartGame();
     }
-    flag--;
-  } else if (flag % 2 == 0 && !ind.includes(index)) {
-    value = "O";
-    fillButton(index, value);
+  } else if (!ind.includes(index)) {
+    fillButton(index, "O");
     ind.push(index);
     os.push(index);
-    console.log(document.getElementById(index).innerHTML);
+    flag--;
+
     if (checkWinner(os)) {
-      winningAlert(value);
+      winningAlert("player 2");
       restartGame();
     }
-    //fillButton(1, "X");
-    // fillButton(9, "X");
-    // fillButton(5, "X");
-    flag--;
   }
 
-  if (flag == 0) restartGame();
+  if (flag == 0) {
+    confirm(`Its a draw!`);
+    restartGame();
+  }
 }
 
 /**
