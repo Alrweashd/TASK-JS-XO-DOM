@@ -3,7 +3,15 @@
 // First button top left is called 1, last button bottom right is 9
 function fillButton(index, text) {
   // This function fills the button of the send index
-  document.getElementById(index).innerHTML = text;
+  if (text === "X") {
+    document.getElementById(index).style.color = "green";
+    // document.getElementById(index).style.transform = "translateZ(5px)";
+    document.getElementById(index).innerHTML = text;
+    // document.getElementById(index).animate();
+  } else {
+    document.getElementById(index).style.color = "red";
+    document.getElementById(index).innerHTML = text;
+  }
 }
 // pre-made a function. You can use this function to present an alert to say someone wins
 function winningAlert(winner) {
@@ -43,6 +51,7 @@ function clickButton(index) {
     xs.push(index);
     fillButton(index, "X");
     flag--;
+    document.getElementById(index);
     if (checkWinner(xs)) {
       winningAlert("player 1");
       restartGame();
