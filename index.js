@@ -44,33 +44,28 @@ let rules = [
   [1, 5, 9], //cross
   [3, 5, 7],
 ];
+let oAI;
 
 function clickButton(index) {
-  if (flag % 2 == 1 && !ind.includes(index)) {
+  oAI = index;
+  if (!ind.includes(index)) {
     ind.push(index);
     xs.push(index);
     fillButton(index, "X");
     flag--;
-    document.getElementById(index);
     if (checkWinner(xs)) {
       winningAlert("player 1");
       restartGame();
     }
-  } else if (!ind.includes(index)) {
-    fillButton(index, "O");
-    ind.push(index);
-    os.push(index);
-    flag--;
-
-    if (checkWinner(os)) {
-      winningAlert("player 2");
-      restartGame();
-    }
+    //console.log(generateRandom(1, 9, oAI));
   }
-
+  //oAiPlayer(oAI)
+  oAiPlayer(oAI);
+  if (flag == 9) restartGame();
   if (flag == 0) {
     confirm(`Its a draw!`);
     restartGame();
+    document.getElementById(2).innerHTML = "hrr";
   }
 }
 
@@ -99,4 +94,27 @@ function restartGame() {
   ind = [];
   xs = [];
   os = [];
+}
+
+function oAiPlayer(e) {
+  let v = generateRandom(1, 9);
+  document.getElementById(v).style.color = "red";
+  document.getElementById(v).innerHTML = "O";
+
+  ind.push(v);
+  os.push(v);
+  flag--;
+  if (checkWinner(os)) {
+    winningAlert("player 2");
+    restartGame();
+  }
+  return v;
+}
+function generateRandom(min, max) {
+  let num = Math.floor(Math.random() * (max - min + 1)) + min;
+  return ind.includes(num) && flag % 2 == 0 ? generateRandom(min, max) : num;
+  if (ind.includes(num)) {
+    return generateRandom(min, max);
+  } else if (!ind.includes(num)) return num;
+  else return "finid";
 }
